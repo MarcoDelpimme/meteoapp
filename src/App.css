@@ -39,11 +39,20 @@
 
 #left-bar {
   padding-top: 50px;
-  background-color: rgba(0, 70, 135, 0.718);
+  background-color: rgba(65, 65, 65, 0.411);
   height: 100vh;
 }
 
 #citycard {
   height: 100vh;
-  background-color: rgba(92, 92, 92, 0.413);
+  background-color: rgba(0, 0, 0, 0.67);
+}
+
+#details {
+  background: rgba(0, 96, 185, 0.84);
+  padding: 2rem;
+  border-radius: 18%;
+  height: 300px;
+  width: 300px;
+  font-size: 55px;
 }
