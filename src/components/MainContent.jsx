@@ -2,11 +2,11 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import CityCard from "./CityCard";
 
-const MainContent = ({ cities, addCityToSelected }) => {
+const MainContent = ({ cities, addCityToSelected, forecast }) => {
   return (
-    <Col className="text-center">
+    <Col className="text-center" id="maincontent">
       {cities.map((city, index) => (
-        <CityCard key={index} city={city} addCityToSelected={addCityToSelected} />
+        <CityCard key={index} city={city} addCityToSelected={addCityToSelected} forecast={forecast} />
       ))}
     </Col>
   );

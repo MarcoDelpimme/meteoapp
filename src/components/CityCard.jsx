@@ -1,7 +1,8 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, ListGroupItem, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { ListGroup } from "react-bootstrap";
 
-const CityCard = ({ city, addCityToSelected }) => {
+const CityCard = ({ city, addCityToSelected, forecast }) => {
   const handleAddCity = () => {
     addCityToSelected(city);
   };
@@ -11,7 +12,7 @@ const CityCard = ({ city, addCityToSelected }) => {
       <Card.Body>
         <Row>
           <Card.Title className="row align-items-center justify-content-center">
-            <h1 className="col-auto display-2"> {city.name}</h1>
+            <h1 className="col-auto display-1"> {city.name}</h1>
             {city.icon && (
               <img src={`http://openweathermap.org/img/wn/${city.icon}.png`} alt="Weather Icon" className="col-2" />
             )}
@@ -41,7 +42,23 @@ const CityCard = ({ city, addCityToSelected }) => {
               <br />
               <i className="bi bi-thermometer-snow"></i>
             </Col>
-            <Button onClick={handleAddCity}>Add to List</Button>
+            <Button onClick={handleAddCity} id="buttonOfMain">
+              <i class="bi bi-plus-square"></i>
+            </Button>
+            <Col xs={12}>
+              <h5>Forecast:</h5>
+              <ul>
+                {forecast &&
+                  forecast.map((item, index) => (
+                    <ListGroup key={index}>
+                      <ListGroupItem className="mb-2 p-3" id="listForecast">
+                        {" "}
+                        {item.date}: {item.temperature}°C, Humidity: {item.humidity}%
+                      </ListGroupItem>
+                    </ListGroup>
+                  ))}
+              </ul>
+            </Col>
           </Row>
         </Row>
       </Card.Body>
