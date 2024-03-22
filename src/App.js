@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Col, Container, Row } from "react-bootstrap";
+import LeftBar from "./components/LeftBar";
+import MainContent from "./components/Main";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-function App() {
+const API_KEY = "caf5059b1aa192c345dbb78bf02b29c6";
+
+const App = () => {
+  const [cities, setCities] = useState([]);
+
+  const handleSearch = async (cityName) => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) {
+        throw new Error("City not found");
+      }
+      const data = await response.json();
+      console.log(data);
+      const cityData = {
+        name: data.name,
+        temperature: data.main.temp,
+        humidity: data.main.humidity,
+        MaxTemp: data.main.temp_max,
+        MinTemp: data.main.temp_min,
+        icon: data.weather[0].icon,
+      };
+
+      if (!cities.some((city) => city.name === cityData.name)) {
+        setCities([cityData]);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Container fluid>
+        <Row>
+          <Col xs={4} id="left-bar">
+            <LeftBar onSearch={handleSearch} />
+          </Col>
+          <Col xs={8}>
+            {" "}
+            <MainContent cities={cities} />
+          </Col>
+        </Row>
+      </Container>
+    </Router>
   );
-}
+};
 
 export default App;

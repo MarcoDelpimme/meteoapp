@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+#left-bar {
+  padding-top: 50px;
+  background-color: rgba(0, 70, 135, 0.718);
+  height: 100vh;
+}
+
+#citycard {
+  height: 100vh;
+  background-color: rgba(92, 92, 92, 0.413);
+}
