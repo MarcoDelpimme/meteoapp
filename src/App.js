@@ -2,14 +2,24 @@ import React, { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import LeftBar from "./components/LeftBar";
-import MainContent from "./components/Main";
+import MainContent from "./components/MainContent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import CityList from "./components/CityList";
 
 const API_KEY = "caf5059b1aa192c345dbb78bf02b29c6";
 
 const App = () => {
   const [cities, setCities] = useState([]);
+  const [selectedCities, setSelectedCities] = useState([]);
+
+  const addCityToSelected = (city) => {
+    setSelectedCities((prevCities) => [...prevCities, city]);
+  };
+
+  const handleCityClick = (city) => {
+    setCities([city]);
+  };
 
   const handleSearch = async (cityName) => {
     try {
@@ -42,12 +52,12 @@ const App = () => {
     <Router>
       <Container fluid>
         <Row>
-          <Col xs={4} id="left-bar">
-            <LeftBar onSearch={handleSearch} />
+          <Col xs={3} id="left-bar">
+            <LeftBar onSearch={handleSearch} selectedCities={selectedCities} onCityClick={handleCityClick} />
           </Col>
-          <Col xs={8}>
+          <Col xs={9}>
             {" "}
-            <MainContent cities={cities} />
+            <MainContent cities={cities} addCityToSelected={addCityToSelected} />
           </Col>
         </Row>
       </Container>

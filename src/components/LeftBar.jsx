@@ -1,7 +1,8 @@
 import { Col } from "react-bootstrap";
 import SearchBar from "./SearchBar";
+import CityList from "./CityList";
 
-const LeftBar = ({ onSearch }) => {
+const LeftBar = ({ onSearch, selectedCities, onCityClick }) => {
   return (
     <Col>
       <h2 className="text-white">
@@ -13,6 +14,7 @@ const LeftBar = ({ onSearch }) => {
         />
       </h2>
       <SearchBar onSearch={onSearch} />
+      <CityList cities={selectedCities} onCityClick={onCityClick} />
     </Col>
   );
 };
