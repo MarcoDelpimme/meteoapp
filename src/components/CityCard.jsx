@@ -46,7 +46,7 @@ const CityCard = ({ city, addCityToSelected, forecast }) => {
               <i class="bi bi-plus-square"></i>
             </Button>
             <Col xs={12}>
-              <h5>Forecast:</h5>
+              <h1>FORECAST</h1>
               <ul>
                 {forecast &&
                   forecast.map((item, index) => (
